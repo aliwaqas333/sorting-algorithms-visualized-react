@@ -1,0 +1,19 @@
+.column{
+    display: inline-block;
+    margin: 5px;
+    border: 2px solid transparent;
+    transition: all 0.2s ease;
+    &:hover{
+        border: 2px red solid;
+        background-color: transparent!important;
+    }
+}
+.columns-container{
+    height: 500px;
+    display: flex;
+    align-items: baseline;
+}
+
+.current-column{
+    border: 2px solid red;
+}

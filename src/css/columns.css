@@ -1,0 +1,27 @@
+.column {
+  display: inline-block;
+  margin: 5px;
+  border: 2px solid transparent;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+
+.column:hover {
+  border: 2px red solid;
+  background-color: transparent !important;
+}
+
+.columns-container {
+  height: 500px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: baseline;
+      -ms-flex-align: baseline;
+          align-items: baseline;
+}
+
+.current-column {
+  border: 2px solid red;
+}
+/*# sourceMappingURL=columns.css.map */
