@@ -1,9 +1,10 @@
 .column {
   display: inline-block;
-  margin: 5px;
+  margin: 2px;
   border: 2px solid transparent;
   -webkit-transition: all 0.2s ease;
   transition: all 0.2s ease;
+  max-width: 30px;
 }
 
 .column:hover {
@@ -12,7 +13,7 @@
 }
 
 .columns-container {
-  height: 420px;
+  padding: 10px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;

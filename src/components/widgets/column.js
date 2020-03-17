@@ -1,7 +1,6 @@
 import React from "react";
 import { colorArray } from "./_variables";
 // import useFunctions from "../useFunctions/useFunctions";
-const width = 20;
 
 const getColor = height => {
   let color;
@@ -17,7 +16,7 @@ const getColor = height => {
   return color;
 };
 
-export default ({ height, id, current }) => {
+export default ({ height, id, current, width }) => {
   return (
     <div
       style={{

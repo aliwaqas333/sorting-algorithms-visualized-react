@@ -3,12 +3,18 @@ import Column from "./column";
 import useFunctions from "../useFunctions/useFunctions";
 let currentColumn = 0;
 let swapped = [];
-const { getRandomArray } = useFunctions();
-let finished = false;
+const { getRandomArray, calcWidth, calcHeight} = useFunctions();
 let timer;
+// for number of 20 items
+let screenWidth = window.innerWidth
+let screenHeight = window.innerHeight
+let numberOfCols = 15
+let width = calcWidth(screenWidth, numberOfCols)
+let max = calcHeight(screenHeight)
 export default props => {
-  const [columnsArray, setcolumnsArray] = useState(getRandomArray(25));
+  const [columnsArray, setcolumnsArray] = useState(getRandomArray(max, 1, numberOfCols));
   const [start, setstart] = useState(false);
+
   const renderCols = () => {
     return columnsArray.map((c, index) => {
       let current =
@@ -18,7 +24,7 @@ export default props => {
           key={index}
           id={index}
           height={c}
-          width={10}
+          width={width}
           current={current}
         />
       );

@@ -1,15 +1,16 @@
 .column{
     display: inline-block;
-    margin: 5px;
+    margin: 2px;
     border: 2px solid transparent;
     transition: all 0.2s ease;
+    max-width: 30px;
     &:hover{
         border: 2px red solid;
         background-color: transparent!important;
     }
 }
 .columns-container{
-    height: 420px;
+    padding: 10px;
     display: flex;
     align-items: flex-end;
     justify-content: center;
