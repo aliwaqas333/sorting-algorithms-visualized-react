@@ -25,6 +25,7 @@ export default props => {
 
   const getNewArray = () => {
     setcolumnsArray(getRandomArray(max, 1, numberOfColumns));
+    swapped = [];
   };
   const renderCols = () => {
     return columnsArray.map((c, index) => {
