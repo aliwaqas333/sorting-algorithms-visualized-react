@@ -3,18 +3,29 @@ import Column from "./column";
 import useFunctions from "../useFunctions/useFunctions";
 let currentColumn = 0;
 let swapped = [];
-const { getRandomArray, calcWidth, calcHeight} = useFunctions();
+const { getRandomArray, calcWidth, calcHeight } = useFunctions();
 let timer;
 // for number of 20 items
-let screenWidth = window.innerWidth
-let screenHeight = window.innerHeight
-let numberOfCols = 15
-let width = calcWidth(screenWidth, numberOfCols)
-let max = calcHeight(screenHeight)
+let screenWidth = window.innerWidth;
+let screenHeight = window.innerHeight;
+let numberOfCols = 100;
+const speed = 10;
+
+window.addEventListener("resize", function() {
+  window.location.reload();
+});
 export default props => {
-  const [columnsArray, setcolumnsArray] = useState(getRandomArray(max, 1, numberOfCols));
+  const [numberOfColumns, setnumberOfColumns] = useState(numberOfCols);
+  let width = calcWidth(screenWidth, numberOfColumns);
+  let max = calcHeight(screenHeight);
+  const [columnsArray, setcolumnsArray] = useState(
+    getRandomArray(max, 1, numberOfColumns)
+  );
   const [start, setstart] = useState(false);
 
+  const getNewArray = () => {
+    setcolumnsArray(getRandomArray(max, 1, numberOfColumns));
+  };
   const renderCols = () => {
     return columnsArray.map((c, index) => {
       let current =
@@ -29,6 +40,14 @@ export default props => {
         />
       );
     });
+  };
+  const handleColumnsChange = (n) => {
+    console.log('numberOfColumns + n', numberOfColumns + n)
+    if(numberOfColumns + n > 10 && numberOfColumns + n < 200){
+      
+    setnumberOfColumns(numberOfColumns + n)
+    getNewArray()
+    }
   };
 
   const swap = (left, right) => {
@@ -53,6 +72,7 @@ export default props => {
       stop();
     }
   };
+
   const bubbleSort = () => {
     // console.log("bubbleSort");
     swap(currentColumn, currentColumn + 1);
@@ -61,7 +81,7 @@ export default props => {
   function startSort() {
     // use a one-off timer
     if (start) {
-      timer = setTimeout(bubbleSort, 300);
+      timer = setTimeout(bubbleSort, speed);
     }
   }
 
@@ -71,18 +91,57 @@ export default props => {
   startSort();
   return (
     <div className="container-fluid">
+      {/* Action center */}
+      <div className="d-flex justify-content-center">
+        <button
+          onClick={() => {
+            handleColumnsChange(10);
+          }}
+          className="btn btn-sm btn-success m-2"
+          type="button"
+        >
+          + 10
+        </button>
+        <button
+          onClick={() => {
+            handleColumnsChange(-10);
+          }}
+          className="btn btn-sm btn-danger m-2"
+          type="button"
+        >
+          - 10
+        </button>
+      </div>
       <div className="row shadow columns-container">
         <div>{renderCols()}</div>
       </div>
-      <div className='d-flex justify-content-center mt-2'>
+      <div className="d-flex justify-content-between mt-2">
+        <button onClick={getNewArray} className="btn btn-warning">
+          Create New
+        </button>
         <button
           onClick={() => {
             setstart(!start);
           }}
-          className="btn btn-success p-3"
+          className="btn btn-success"
         >
           Start Sort
         </button>
+      </div>
+      {/* Information box */}
+      <div className="mt-3">
+        <div className="row">
+          <div className="col-6">
+            <div className="alert alert-primary" role="alert">
+              It will take {(numberOfColumns * (numberOfColumns - 1)) / 2} moves to sort this array
+            </div>
+          </div>
+          <div className="col-6">
+            <div className="alert alert-success" role="alert">
+              Number of Columns : {numberOfColumns}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

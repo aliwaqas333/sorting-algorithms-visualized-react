@@ -15,9 +15,9 @@ export default function useFunctions() {
     calcWidth: (screenWidth, numberOfCols) => {
       let x = screenWidth / numberOfCols;
       if (x > 30) {
-        return 25;
+        return 20;
       } else {
-        return x - 10;
+        return x - 15;
       }
     },
     calcHeight: (screenHeight)=>{
