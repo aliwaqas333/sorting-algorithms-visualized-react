@@ -8,7 +8,7 @@ export default function useFunctions(){
     getRandomArray:(n)=>{
       let arr = Array(n).fill(0);
       arr.forEach((item, index)=>{
-        arr[index] = Math.floor(Math.random() * (500 - 1)) + 1;
+        arr[index] = Math.floor(Math.random() * (400 - 1)) + 1;
       })
       return arr
       

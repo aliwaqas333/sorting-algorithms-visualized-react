@@ -9,11 +9,14 @@
     }
 }
 .columns-container{
-    height: 500px;
+    height: 420px;
     display: flex;
-    align-items: baseline;
+    align-items: flex-end;
+    justify-content: center;
+    // background-color: black;
 }
 
 .current-column{
-    border: 2px solid red;
+    border: 2px dashed red;
+    // background-color: red!important;
 }
