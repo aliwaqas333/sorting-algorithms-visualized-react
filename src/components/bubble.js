@@ -146,16 +146,10 @@ export default props => {
   const bubbleSort = () => {
     swap(currentColumn, currentColumn + 1);
   };
-  const selectionSort = () => {};
 
   function startSort() {
     if (start) {
-      if (sort === "bubble") {
-        timer = setTimeout(bubbleSort, speed);
-      }
-      if (sort === "selection") {
-        timer = setTimeout(selectionSort, speed);
-      }
+      timer = setTimeout(bubbleSort, speed);
     }
   }
 

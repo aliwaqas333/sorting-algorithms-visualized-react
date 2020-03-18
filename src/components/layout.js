@@ -2,9 +2,10 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
-import RestoreIcon from "@material-ui/icons/Restore";
-import FavoriteIcon from "@material-ui/icons/Favorite";
+
+import SelectAllIcon from '@material-ui/icons/SelectAll';
 import LocationOnIcon from "@material-ui/icons/LocationOn";
+import BubbleChartIcon from '@material-ui/icons/BubbleChart';
 import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles({
@@ -20,6 +21,7 @@ export default function Layout(props) {
 
   return (
     <div className='d-flex justify-content-center'>
+
       <BottomNavigation
         value={value}
         onChange={(event, newValue) => {
@@ -27,19 +29,20 @@ export default function Layout(props) {
           setValue(newValue);
         }}
         showLabels
-        className={classes.root}
+        className={classes.root} 
       >
+        <h5 className='mt-2'>Sorting Algorithms</h5>
         <BottomNavigationAction
           value="bubble"
           label="Buble"
-          icon={<RestoreIcon />}
+          icon={<BubbleChartIcon />}
         />
         <BottomNavigationAction
           value="selection"
           label="Selection"
-          icon={<FavoriteIcon />}
+          icon={<SelectAllIcon />}
         />
-        <BottomNavigationAction label="Nearby" icon={<LocationOnIcon />} />
+        <BottomNavigationAction label="Coming Soon.." icon={<LocationOnIcon />} />
       </BottomNavigation>
     </div>
   );
