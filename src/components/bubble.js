@@ -10,8 +10,8 @@ let timer;
 // for number of 20 items
 let screenWidth = window.innerWidth;
 let screenHeight = window.innerHeight;
-let numberOfCols = 30;
-const speed = 10;
+let numberOfCols = 20;
+const speed = 50;
 
 window.addEventListener("resize", function() {
   window.location.reload();
@@ -85,10 +85,10 @@ export default props => {
 
   function startSort() {
     if (start) {
-      if(sort == 'bubble'){
+      if(sort === 'bubble'){
         timer = setTimeout(bubbleSort, speed);
       }
-      if(sort == 'selection'){
+      if(sort === 'selection'){
         timer = setTimeout(selectionSort, speed);
       }
     }
