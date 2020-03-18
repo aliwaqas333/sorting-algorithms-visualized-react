@@ -1,14 +1,14 @@
 .column {
   display: inline-block;
   margin: 2px;
-  border: 2px solid transparent;
+  border: 0.1px solid black;
   -webkit-transition: all 0.2s ease;
   transition: all 0.2s ease;
   max-width: 30px;
 }
 
 .column:hover {
-  border: 2px red solid;
+  border: 0.1px red solid;
   background-color: transparent !important;
 }
 
@@ -23,6 +23,7 @@
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  min-height: 55vh;
 }
 
 .current-column {

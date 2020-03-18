@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import Column from "./widgets/column";
 import useFunctions from "./useFunctions/useFunctions";
-import LinearProgress from '@material-ui/core/LinearProgress';
-
+import LinearProgress from "@material-ui/core/LinearProgress";
+import ViewWeekIcon from "@material-ui/icons/ViewWeek";
+import FastForwardIcon from "@material-ui/icons/FastForward";
+import FastRewindIcon from "@material-ui/icons/FastRewind";
 let currentColumn = 0;
 let swapped = [];
 const { getRandomArray, calcWidth, calcHeight } = useFunctions();
@@ -11,13 +13,13 @@ let timer;
 let screenWidth = window.innerWidth;
 let screenHeight = window.innerHeight;
 let numberOfCols = 20;
-const speed = 50;
 
 window.addEventListener("resize", function() {
   window.location.reload();
 });
 export default props => {
   const [sort, setsort] = useState(props.sort);
+  const [speed, setspeed] = useState(50);
   const [numberOfColumns, setnumberOfColumns] = useState(numberOfCols);
   let width = calcWidth(screenWidth, numberOfColumns);
   let max = calcHeight(screenHeight);
@@ -45,8 +47,73 @@ export default props => {
       );
     });
   };
+  const actionCenter = () => {
+    return (
+      <div className="d-flex justify-content-center bg-warning align-items-baseline">
+        <button
+          onClick={() => {
+            handleColumnsChange(10);
+          }}
+          className="btn btn-sm btn-success m-2"
+          type="button"
+          disabled={start}
+        >
+          +
+          <ViewWeekIcon />
+        </button>
+        {numberOfColumns}
+        <button
+          onClick={() => {
+            handleColumnsChange(-10);
+          }}
+          className="btn btn-sm btn-danger m-2"
+          type="button"
+          disabled={start}
+        >
+          -
+          <ViewWeekIcon />
+        </button>
+        <button
+          onClick={() => {
+            handleSpeedChange("+");
+          }}
+          className="btn btn-sm btn-success m-2"
+          type="button"
+          disabled={start}
+        >
+          <FastForwardIcon />
+          Speed Up
+        </button>
+        {speed}
+        <button
+          onClick={() => {
+            handleSpeedChange("-");
+          }}
+          className="btn btn-sm btn-danger m-2"
+          type="button"
+          disabled={start}
+        >
+          <FastRewindIcon />
+          Slow Down
+        </button>
+        <span>Current delay: {speed}</span>
+      </div>
+    );
+  };
+  const handleSpeedChange = s => {
+    if (s === "+") {
+      if (speed > 10) {
+        setspeed(speed - 10);
+      }
+    }
+    if (s === "-") {
+      if (speed > -1) {
+        setspeed(speed + 50);
+      }
+    }
+  };
   const handleColumnsChange = n => {
-    if(start) return false
+    if (start) return false;
     if (numberOfColumns + n > 10 && numberOfColumns + n < 200) {
       setnumberOfColumns(numberOfColumns + n);
       getNewArray();
@@ -79,23 +146,21 @@ export default props => {
   const bubbleSort = () => {
     swap(currentColumn, currentColumn + 1);
   };
-  const selectionSort =()=>{
-
-  }
+  const selectionSort = () => {};
 
   function startSort() {
     if (start) {
-      if(sort === 'bubble'){
+      if (sort === "bubble") {
         timer = setTimeout(bubbleSort, speed);
       }
-      if(sort === 'selection'){
+      if (sort === "selection") {
         timer = setTimeout(selectionSort, speed);
       }
     }
   }
 
   function stop() {
-    setstart(false)
+    setstart(false);
     clearTimeout(timer);
   }
   startSort();
@@ -103,39 +168,8 @@ export default props => {
     <div className="container-fluid">
       <div className="bg-light p-1">
         <h1>Bubble Sort</h1>
-        <p>
-          Bubble Sort is the simplest sorting algorithm that works by repeatedly
-          swapping the adjacent elements if they are in wrong order.
-        </p>
       </div>
       {/* Action center */}
-      <div className="d-flex justify-content-center">
-        <button
-          onClick={() => {
-            handleColumnsChange(10);
-          }}
-          className="btn btn-sm btn-success m-2"
-          type="button"
-          disabled={start}
-        >
-          + 10
-        </button>
-        <button
-          onClick={() => {
-            handleColumnsChange(-10);
-          }}
-          className="btn btn-sm btn-danger m-2"
-          type="button"
-          disabled={start}
-
-        >
-          - 10
-        </button>
-      </div>
-        <div>{start && <LinearProgress/>}</div>
-      <div className="row shadow columns-container">
-        <div>{renderCols()}</div>
-      </div>
       <div className="d-flex justify-content-between mt-2">
         <button onClick={getNewArray} className="btn btn-warning">
           Create New
@@ -147,9 +181,13 @@ export default props => {
           className="btn btn-success"
         >
           {start ? <span>Pause Sort</span> : <span>Start Sort</span>}
-
         </button>
       </div>
+      <div>{start && <LinearProgress />}</div>
+      <div className="row shadow columns-container">
+        <div>{renderCols()}</div>
+      </div>
+      {actionCenter()}
       {/* Information box */}
       <div className="mt-3">
         <div className="row">
