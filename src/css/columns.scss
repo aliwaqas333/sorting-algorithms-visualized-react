@@ -1,11 +1,11 @@
 .column{
     display: inline-block;
     margin: 2px;
-    border: 0.1px solid black;
+    border: 2px solid transparent;
     transition: all 0.2s ease;
     max-width: 30px;
     &:hover{
-        border: 0.1px red solid;
+        border: 2px red solid;
         background-color: transparent!important;
     }
 }
@@ -14,7 +14,7 @@
     display: flex;
     align-items: flex-end;
     justify-content: center;
-    min-height: 55vh;
+    min-height: 50vh;
     // background-color: black;
 }
 

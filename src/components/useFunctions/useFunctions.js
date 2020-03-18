@@ -17,7 +17,7 @@ export default function useFunctions() {
       if (x > 30) {
         return 20;
       } else {
-        return x - 15;
+        return x - 5;
       }
     },
     calcHeight: (screenHeight)=>{
