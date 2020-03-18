@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Column from "./widgets/column";
 import useFunctions from "./useFunctions/useFunctions";
+import LinearProgress from '@material-ui/core/LinearProgress';
+
 let currentColumn = 0;
 let swapped = [];
 const { getRandomArray, calcWidth, calcHeight } = useFunctions();
@@ -8,13 +10,14 @@ let timer;
 // for number of 20 items
 let screenWidth = window.innerWidth;
 let screenHeight = window.innerHeight;
-let numberOfCols = 100;
+let numberOfCols = 30;
 const speed = 10;
 
 window.addEventListener("resize", function() {
   window.location.reload();
 });
 export default props => {
+  const [sort, setsort] = useState(props.sort);
   const [numberOfColumns, setnumberOfColumns] = useState(numberOfCols);
   let width = calcWidth(screenWidth, numberOfColumns);
   let max = calcHeight(screenHeight);
@@ -43,7 +46,7 @@ export default props => {
     });
   };
   const handleColumnsChange = n => {
-    console.log("numberOfColumns + n", numberOfColumns + n);
+    if(start) return false
     if (numberOfColumns + n > 10 && numberOfColumns + n < 200) {
       setnumberOfColumns(numberOfColumns + n);
       getNewArray();
@@ -76,14 +79,23 @@ export default props => {
   const bubbleSort = () => {
     swap(currentColumn, currentColumn + 1);
   };
+  const selectionSort =()=>{
+
+  }
 
   function startSort() {
     if (start) {
-      timer = setTimeout(bubbleSort, speed);
+      if(sort == 'bubble'){
+        timer = setTimeout(bubbleSort, speed);
+      }
+      if(sort == 'selection'){
+        timer = setTimeout(selectionSort, speed);
+      }
     }
   }
 
   function stop() {
+    setstart(false)
     clearTimeout(timer);
   }
   startSort();
@@ -104,6 +116,7 @@ export default props => {
           }}
           className="btn btn-sm btn-success m-2"
           type="button"
+          disabled={start}
         >
           + 10
         </button>
@@ -113,10 +126,13 @@ export default props => {
           }}
           className="btn btn-sm btn-danger m-2"
           type="button"
+          disabled={start}
+
         >
           - 10
         </button>
       </div>
+        <div>{start && <LinearProgress/>}</div>
       <div className="row shadow columns-container">
         <div>{renderCols()}</div>
       </div>
@@ -130,7 +146,8 @@ export default props => {
           }}
           className="btn btn-success"
         >
-          Start Sort
+          {start ? <span>Pause Sort</span> : <span>Start Sort</span>}
+
         </button>
       </div>
       {/* Information box */}
