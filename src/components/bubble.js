@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Column from "./widgets/column";
 import useFunctions from "./useFunctions/useFunctions";
+import LinearProgress from '@material-ui/core/LinearProgress';
+
 let currentColumn = 0;
 let swapped = [];
 const { getRandomArray, calcWidth, calcHeight } = useFunctions();
+
 let timer;
 // for number of 20 items
 let screenWidth = window.innerWidth;
@@ -25,7 +28,9 @@ export default props => {
 
   const getNewArray = () => {
     setcolumnsArray(getRandomArray(max, 1, numberOfColumns));
+    currentColumn = 0
     swapped = [];
+    setstart(false)
   };
   const renderCols = () => {
     return columnsArray.map((c, index) => {
@@ -43,7 +48,8 @@ export default props => {
     });
   };
   const handleColumnsChange = n => {
-    console.log("numberOfColumns + n", numberOfColumns + n);
+    if(start) return false
+
     if (numberOfColumns + n > 10 && numberOfColumns + n < 200) {
       setnumberOfColumns(numberOfColumns + n);
       getNewArray();
@@ -69,6 +75,7 @@ export default props => {
     setcolumnsArray(newArray);
     if (swapped.length === columnsArray.length - 1) {
       currentColumn = -2;
+      setstart(false)
       stop();
     }
   };
@@ -130,7 +137,9 @@ export default props => {
           }}
           className="btn btn-success"
         >
-          Start Sort
+        {start && <>Pause Sorting</>}
+        {!start && <>Start Sort</>}
+          
         </button>
       </div>
       {/* Information box */}
@@ -148,6 +157,7 @@ export default props => {
             </div>
           </div>
         </div>
+        {start && <LinearProgress color='secondary'/>}
       </div>
     </div>
   );
