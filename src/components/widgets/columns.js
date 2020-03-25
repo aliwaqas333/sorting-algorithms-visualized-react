@@ -25,16 +25,17 @@ export default props => {
   const [start, setstart] = useState(false);
 
   const getNewArray = () => {
-    // setcolumnsArray(getRandomArray(max, 1, numberOfColumns));
-    window.location.reload()
+    setcolumnsArray(getRandomArray(max, 1, numberOfColumns));
   };
 
   const actionCenter = () => {
     return (
       <div className="d-flex justify-content-center bg-warning align-items-baseline">
         <button
-          onClick={() => {
+          onClick={(e) => {
+            e.preventDefault()
             handleColumnsChange(10);
+            return false
           }}
           className="btn btn-sm btn-success m-2"
           type="button"
@@ -98,12 +99,13 @@ export default props => {
     }
   };
   const handleColumnsChange = n => {
-    if (start) return false;
-    if (numberOfColumns + n > 10 && numberOfColumns + n < 200) {
-      setnumberOfColumns(numberOfColumns + n);
-      getNewArray();
-    }
-  };
+    if (!start){      
+      if (numberOfColumns + n > 10 && numberOfColumns + n < 200) {
+        setnumberOfColumns(numberOfColumns + n);
+        getNewArray();
+      }
+    };
+  }
 
   const display = (cols) => {
     return (
@@ -152,6 +154,7 @@ export default props => {
     setcolumnsArray: setcolumnsArray,
     columnsArray: columnsArray,
     start: start,
+    setstart:setstart,
     speed: speed,
     width: width
   };

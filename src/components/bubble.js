@@ -4,6 +4,7 @@ import useFunctions from "./useFunctions/useFunctions";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import ViewWeekIcon from "@material-ui/icons/ViewWeek";
 import FastForwardIcon from "@material-ui/icons/FastForward";
+import CircularProgress from '@material-ui/core/CircularProgress';
 import FastRewindIcon from "@material-ui/icons/FastRewind";
 let currentColumn = 0;
 let swapped = [];
@@ -165,7 +166,7 @@ export default props => {
   return (
     <div className="container-fluid">
       <div className="bg-light p-1">
-        <h1>Bubble Sort</h1>
+        <h1>Bubble Sort </h1>
       </div>
       {/* Action center */}
       <div className="d-flex justify-content-between mt-2">

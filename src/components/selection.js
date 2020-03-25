@@ -11,6 +11,7 @@ export default params => {
     setcolumnsArray,
     columnsArray,
     start,
+    setstart,
     speed,
     width
   } = columns();
@@ -43,6 +44,7 @@ export default params => {
   }
   function stop() {
     clearTimeout(timer);
+    start && setstart(false)
   }
 
   const selectionSort = () => {
