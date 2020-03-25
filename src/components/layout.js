@@ -29,7 +29,7 @@ export default function Layout(props) {
           setValue(newValue);
         }}
         showLabels
-        className={classes.root} 
+        className={classes.root}
       >
         <h5 className='mt-2'>Sorting Algorithms</h5>
         <BottomNavigationAction
@@ -40,6 +40,16 @@ export default function Layout(props) {
         <BottomNavigationAction
           value="selection"
           label="Selection"
+          icon={<SelectAllIcon />}
+        />
+        <BottomNavigationAction
+          value="insertion"
+          label="Insertion"
+          icon={<SelectAllIcon />}
+        />
+        <BottomNavigationAction
+          value="radix"
+          label="Radix"
           icon={<SelectAllIcon />}
         />
         <BottomNavigationAction label="Coming Soon.." icon={<LocationOnIcon />} />

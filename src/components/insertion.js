@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import Column from "./widgets/column";
 import columns from "./widgets/columns";
 let timer;
-let currentColumn = 0,
-  currentMin = 0;
+let currentColumn = 1;
+let currentCompare = 0;
 export default params => {
 
   const {
@@ -29,15 +29,10 @@ export default params => {
       );
     });
   };
-  const swap = (current, min) => {
-    let x = columnsArray[current];
-    columnsArray[current] = columnsArray[min];
-    columnsArray[min] = x;
-  };
 
   function startSort() {
     if (start) {
-      timer = setTimeout(selectionSort, speed);
+      timer = setTimeout(insertionSort, speed);
     } else {
       stop();
     }
@@ -47,31 +42,27 @@ export default params => {
     start && setstart(false)
   }
 
-  const selectionSort = () => {
-    if (columnsArray[currentMin] > columnsArray[currentColumn]) {
-      swap(currentMin, currentColumn);
+  const insertionSort = () => {
+    const currentColumnValue = columnsArray[currentColumn];
+    for (currentCompare = currentColumn - 1; currentCompare >= 0 && columnsArray[currentCompare] > currentColumnValue; currentCompare--) {
+      columnsArray[currentCompare + 1] = columnsArray[currentCompare];
     }
-    currentColumn++;
-    if (currentColumn === columnsArray.length) {
-      currentColumn = currentMin + 1;
-      currentMin++;
-    }
-
+    columnsArray[currentCompare + 1] = currentColumnValue; //columnsArray[currentColumn];
     setcolumnsArray([...columnsArray]);
-    if (currentMin === columnsArray.length) {
+    currentColumn += 1;
+    if ( currentColumn === columnsArray.length ) {
       stop();
       return true;
     }
-    
-  };
+  }
 
   startSort();
   return (
     <div>
       <div className="bg-light p-1">
-        <h1>Selection Sort</h1>
+        <h1>Insertion Sort</h1>
       </div>
-      {display(renderCols(currentMin, currentColumn))}
+      {display(renderCols(currentCompare + 1, currentColumn))}
     </div>
   );
 };
