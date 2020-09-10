@@ -1,5 +1,5 @@
 https://aliwaqas333.github.io/sorting-algorithms/
-
+![Tool Preview](/sorting.PNG)
 Available on the link above!
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
