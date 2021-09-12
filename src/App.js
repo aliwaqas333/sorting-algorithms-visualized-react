@@ -24,6 +24,9 @@ function App() {
           <Route path="/radix">
             <Radix sort='radix' />
           </Route>
+          <Route path="/">
+            <Bubble sort='bubble'/>
+          </Route>
         </Switch>
       </div>
     </>
