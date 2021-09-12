@@ -1,4 +1,6 @@
-https://aliwaqas333.github.io/sorting-algorithms/
+Love Demo : https://aliwaqas333.github.io/sorting-algorithms/
+---
+
 ![Tool Preview](/sorting.PNG)
 Available on the link above!
 
