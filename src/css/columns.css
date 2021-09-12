@@ -28,6 +28,7 @@
 
 .current-column {
   border: 2px dashed red;
+  box-shadow: 1px 200 soild black;
 }
 
 .current-min {

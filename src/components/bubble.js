@@ -4,7 +4,7 @@ import useFunctions from "./useFunctions/useFunctions";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import ViewWeekIcon from "@material-ui/icons/ViewWeek";
 import FastForwardIcon from "@material-ui/icons/FastForward";
-import CircularProgress from '@material-ui/core/CircularProgress';
+import CircularProgress from "@material-ui/core/CircularProgress";
 import FastRewindIcon from "@material-ui/icons/FastRewind";
 let currentColumn = 0;
 let swapped = [];
@@ -14,17 +14,18 @@ let timer;
 // for number of 20 items
 let screenWidth = window.innerWidth;
 let screenHeight = window.innerHeight;
-let numberOfCols = 20;
+let numberOfCols = 10;
 
-window.addEventListener("resize", function() {
+window.addEventListener("resize", function () {
   window.location.reload();
 });
-export default props => {
+export default (props) => {
   const [sort, setsort] = useState(props.sort);
-  const [speed, setspeed] = useState(50);
+  const [speed, setspeed] = useState(300);
   const [numberOfColumns, setnumberOfColumns] = useState(numberOfCols);
   let width = calcWidth(screenWidth, numberOfColumns);
   let max = calcHeight(screenHeight);
+
   const [columnsArray, setcolumnsArray] = useState(
     getRandomArray(max, 1, numberOfColumns)
   );
@@ -32,9 +33,9 @@ export default props => {
 
   const getNewArray = () => {
     setcolumnsArray(getRandomArray(max, 1, numberOfColumns));
-    currentColumn = 0
+    currentColumn = 0;
     swapped = [];
-    setstart(false)
+    setstart(false);
   };
   const renderCols = () => {
     return columnsArray.map((c, index) => {
@@ -54,57 +55,63 @@ export default props => {
   const actionCenter = () => {
     return (
       <div className="d-flex justify-content-center bg-warning align-items-baseline">
-        <button
-          onClick={() => {
-            handleColumnsChange(10);
-          }}
-          className="btn btn-sm btn-success m-2"
-          type="button"
-          disabled={start}
-        >
-          +
-          <ViewWeekIcon />
-        </button>
-        {numberOfColumns}
-        <button
-          onClick={() => {
-            handleColumnsChange(-10);
-          }}
-          className="btn btn-sm btn-danger m-2"
-          type="button"
-          disabled={start}
-        >
-          -
-          <ViewWeekIcon />
-        </button>
-        <button
-          onClick={() => {
-            handleSpeedChange("+");
-          }}
-          className="btn btn-sm btn-success m-2"
-          type="button"
-          disabled={start}
-        >
-          <FastForwardIcon />
-          Speed Up
-        </button>
-        {speed}
-        <button
-          onClick={() => {
-            handleSpeedChange("-");
-          }}
-          className="btn btn-sm btn-danger m-2"
-          type="button"
-          disabled={start}
-        >
-          <FastRewindIcon />
-          Slow Down
-        </button>
-        <span>Current delay: {speed}</span>
+        <div class="shadow sm p-2 mr-2">
+          <p>Change columns number</p>
+          <button
+            onClick={() => {
+              handleColumnsChange(-5);
+            }}
+            className="btn btn-sm btn-danger mr-2"
+            type="button"
+            disabled={start}
+          >
+            -
+            <ViewWeekIcon />
+          </button>
+          Cols : <b>{numberOfColumns}</b>
+          <button
+            onClick={() => {
+              handleColumnsChange(+5);
+            }}
+            className="btn btn-sm btn-success ml-2"
+            type="button"
+            disabled={start}
+          >
+            +
+            <ViewWeekIcon />
+          </button>
+        </div>
+        <div className="p-2 shadow-sm">
+          <p className="text-center">Change Animation speed</p>
+          <button
+            onClick={() => {
+              handleSpeedChange("-");
+            }}
+            className="btn btn-sm btn-danger"
+            type="button"
+            disabled={start}
+          >
+            <FastRewindIcon />
+            Slower
+          </button>
+          Speed(ms): <b>{speed}</b>
+          <button
+            onClick={() => {
+              handleSpeedChange("+");
+            }}
+            className="btn btn-sm btn-success"
+            type="button"
+            disabled={start}
+          >
+            <FastForwardIcon />
+            Faster
+          </button>
+        </div>
+        {/* <span>Current delay: {speed}</span> */}
       </div>
     );
   };
-  const handleSpeedChange = s => {
+  const handleSpeedChange = (s) => {
     if (s === "+") {
       if (speed > 10) {
         setspeed(speed - 10);
@@ -116,11 +123,15 @@ export default props => {
       }
     }
   };
-  const handleColumnsChange = n => {
+  const handleColumnsChange = (n) => {
+    console.log("n", n);
+    console.log("numberOfColumns ", numberOfColumns);
     if (start) return false;
-    if (numberOfColumns + n > 10 && numberOfColumns + n < 200) {
+    if (numberOfColumns + n >= 10 && numberOfColumns + n <= 100) {
       setnumberOfColumns(numberOfColumns + n);
       getNewArray();
+    } else {
+      console.log(numberOfColumns + n);
     }
   };
 
@@ -143,7 +154,7 @@ export default props => {
     setcolumnsArray(newArray);
     if (swapped.length === columnsArray.length - 1) {
       currentColumn = -2;
-      setstart(false)
+      setstart(false);
       stop();
     }
   };
@@ -202,7 +213,7 @@ export default props => {
             </div>
           </div>
         </div>
-        {start && <LinearProgress color='secondary'/>}
+        {start && <LinearProgress color="secondary" />}
       </div>
     </div>
   );
