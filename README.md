@@ -1,4 +1,4 @@
-Love Demo : https://aliwaqas333.github.io/sorting-algorithms/
+### Love Demo : [https://aliwaqas333.github.io/sorting-algorithms/](https://aliwaqas333.github.io/sorting-algorithms-visualized-react/)
 ---
 
 ![Tool Preview](/sorting.PNG)
