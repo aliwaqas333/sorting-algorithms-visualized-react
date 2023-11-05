@@ -8,7 +8,6 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import FastRewindIcon from "@material-ui/icons/FastRewind";
 let currentColumn = 0;
 let swapped = [];
-const { getRandomArray, calcWidth, calcHeight } = useFunctions();
 
 let timer;
 // for number of 20 items
@@ -23,6 +22,7 @@ export default (props) => {
   const [sort, setsort] = useState(props.sort);
   const [speed, setspeed] = useState(300);
   const [numberOfColumns, setnumberOfColumns] = useState(numberOfCols);
+  const { getRandomArray, calcWidth, calcHeight } = useFunctions();
   let width = calcWidth(screenWidth, numberOfColumns);
   let max = calcHeight(screenHeight);
 

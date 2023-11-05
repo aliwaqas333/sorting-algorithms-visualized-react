@@ -6,15 +6,15 @@ import ViewWeekIcon from "@material-ui/icons/ViewWeek";
 import FastForwardIcon from "@material-ui/icons/FastForward";
 import FastRewindIcon from "@material-ui/icons/FastRewind";
 
-const { getRandomArray, calcWidth, calcHeight } = useFunctions();
 let screenWidth = window.innerWidth;
 let screenHeight = window.innerHeight;
 let numberOfCols = 20;
 
-window.addEventListener("resize", function() {
+window.addEventListener("resize", function () {
   window.location.reload();
 });
-export default props => {
+export default (props) => {
+  const { getRandomArray, calcWidth, calcHeight } = useFunctions();
   const [speed, setspeed] = useState(500);
   const [numberOfColumns, setnumberOfColumns] = useState(numberOfCols);
   let width = calcWidth(screenWidth, numberOfColumns);
@@ -33,9 +33,9 @@ export default props => {
       <div className="d-flex justify-content-center bg-warning align-items-baseline">
         <button
           onClick={(e) => {
-            e.preventDefault()
+            e.preventDefault();
             handleColumnsChange(10);
-            return false
+            return false;
           }}
           className="btn btn-sm btn-success m-2"
           type="button"
@@ -83,13 +83,13 @@ export default props => {
       </div>
     );
   };
-  const handleSpeedChange = s => {
+  const handleSpeedChange = (s) => {
     if (s === "+") {
       if (speed > 10) {
         setspeed(speed - 10);
       }
-      if(speed > 100){
-        setspeed(speed - 50)
+      if (speed > 100) {
+        setspeed(speed - 50);
       }
     }
     if (s === "-") {
@@ -98,14 +98,14 @@ export default props => {
       }
     }
   };
-  const handleColumnsChange = n => {
-    if (!start){      
+  const handleColumnsChange = (n) => {
+    if (!start) {
       if (numberOfColumns + n > 10 && numberOfColumns + n < 200) {
         setnumberOfColumns(numberOfColumns + n);
         getNewArray();
       }
-    };
-  }
+    }
+  };
 
   const display = (cols) => {
     return (
@@ -154,8 +154,8 @@ export default props => {
     setcolumnsArray: setcolumnsArray,
     columnsArray: columnsArray,
     start: start,
-    setstart:setstart,
+    setstart: setstart,
     speed: speed,
-    width: width
+    width: width,
   };
 };
