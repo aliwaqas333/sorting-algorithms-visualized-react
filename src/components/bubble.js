@@ -6,6 +6,11 @@ import ViewWeekIcon from "@material-ui/icons/ViewWeek";
 import FastForwardIcon from "@material-ui/icons/FastForward";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import FastRewindIcon from "@material-ui/icons/FastRewind";
+import {
+  handleSpeedChange,
+  handleColumnsChange,
+} from "./useFunctions/utilities";
+
 let currentColumn = 0;
 let swapped = [];
 
@@ -19,10 +24,10 @@ window.addEventListener("resize", function () {
   window.location.reload();
 });
 export default (props) => {
+  const { getRandomArray, calcWidth, calcHeight } = useFunctions();
   const [sort, setsort] = useState(props.sort);
   const [speed, setspeed] = useState(300);
   const [numberOfColumns, setnumberOfColumns] = useState(numberOfCols);
-  const { getRandomArray, calcWidth, calcHeight } = useFunctions();
   let width = calcWidth(screenWidth, numberOfColumns);
   let max = calcHeight(screenHeight);
 

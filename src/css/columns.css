@@ -9,7 +9,7 @@
 
 .column:hover {
   border: 2px red solid;
-  background-color: transparent !important;
+  /* background-color: transparent !important; */
 }
 
 .columns-container {
@@ -27,8 +27,35 @@
 }
 
 .current-column {
-  border: 2px dashed red;
-  box-shadow: 1px 200 soild black;
+  border: 2px dashed rgb(12, 170, 187);
+  box-shadow: 2px 200 soild rgb(209, 216, 0);
+  position: relative; 
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(96, 109, 188, 0.1), /* 50% transparent */
+    rgba(96, 109, 188, 0.1) 10px,
+    rgba(70, 82, 152, 0.5) 10px,
+    rgba(70, 82, 152, 0.1) 20px
+  );
+
+}
+
+.current-column::before {
+  content: "";
+  position: absolute;
+  top: -15px; /* Adjust as necessary to position the arrow above the column */
+  left: 50%;
+  /* -webkit-transform: rotate(180deg); */
+  transform: translateX(-50%); /* Center the arrow */
+  width: 0; 
+  height: 0; 
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid rgb(0, 191, 255); /* Adjust color and size of arrow */
+}
+
+.column-sorted {
+  border: 2px solid red;
 }
 
 .current-min {

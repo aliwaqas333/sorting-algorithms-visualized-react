@@ -7,7 +7,7 @@ import "./css/columns.css";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 ReactDOM.render(
-  <Router basename="/">
+  <Router basename="/sorting-algorithms-visualized-react">
     <App />
   </Router>,
   document.getElementById("root")
